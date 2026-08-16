@@ -11,7 +11,7 @@ Estudiante: Esteban Vargas Fernández — Carné: 2023395790
 
 1. **Ubicate en la carpeta correcta.** Abrí MATLAB. En el panel "Current Folder" (arriba), navegá hasta la carpeta `script/` de este repositorio, donde está `SistControl_MotorDC.m`.
 2. **Abrí el archivo.** Doble clic sobre `SistControl_MotorDC.m` en el panel "Current Folder" para abrirlo en el Editor.
-3. **Ejecutá el script.** Con el archivo abierto, presioná `F5` o el botón verde ▶ "Run". Si aparece "Change Folder or Add to Path", hacé clic en "Change Folder" (es normal).
+3. **Ejecutá el script.** Con el archivo abierto, presioná `F5` o el botón verde ▶ "Run". Si aparece "Change Folder or Add to Path", hacé clic en "Change Folder".
 4. **Respondé las 5 preguntas en la Command Window**, en este orden exacto, escribiendo un número y dando Enter en cada una:
    - `Kt` (constante de par del motor) [N·m/A]
    - `Ra` (resistencia de armadura) [Ω]
