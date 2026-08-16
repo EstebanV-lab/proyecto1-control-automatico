@@ -1,214 +1,88 @@
-# proyecto1-control-automatico
-# Proyecto Individual 1 — Laboratorio de Control Automático
+# Proyecto individual 1 - Simulación de motor de CD (sistema de primer orden)
+
+**EL-5409 Laboratorio de Control Automático**
+Instituto Tecnológico de Costa Rica — II Semestre 2026
 
 ## Descripción
 
-Este proyecto implementa en MATLAB la simulación de un motor de corriente directa modelado como un sistema de primer orden:
+Este script simula la respuesta al escalón unitario de un motor de CD modelado como un sistema de primer orden:
 
-[
-G(s)=\frac{K_M}{\tau s+1}
-]
+```
+G(s) = KM / (τs + 1)
+```
 
-donde:
+Los coeficientes `KM` (ganancia) y `τ` (constante de tiempo) se calculan a partir de 5 parámetros físicos del motor, en lugar de estar fijos en el código:
 
-[
-K_M=\frac{K_t}{R_ab+K_tK_b}
-]
-
-[
-\tau=\frac{R_aJ}{R_ab+K_tK_b}
-]
-
-El programa solicita los parámetros del motor, valida las entradas, calcula (K_M) y (\tau), genera la función de transferencia y grafica la respuesta al escalón unitario.
-
----
+```
+KM  = Kt / (Ra·b + Kt·Kb)
+τ   = Ra·J / (Ra·b + Kt·Kb)
+```
 
 ## Archivo principal
 
-El script que debe ejecutarse es:
-
-```text
-proyecto1_motor_cd.m
-```
-
----
+`proyecto1_motor_cd.m` — script único, autocontenido. La versión `proyecto1_motor_cd_comentado.m` es funcionalmente idéntica pero incluye comentarios línea por línea con fines didácticos.
 
 ## Requisitos
 
-* MATLAB
-* Control System Toolbox
+- **MATLAB** con Control System Toolbox instalado, **o**
+- **GNU Octave** con el paquete `control` instalado:
+  ```
+  pkg install -forge control
+  pkg load control
+  ```
+  (en MATLAB no se necesita ningún `pkg load`, el toolbox ya viene integrado)
 
----
+## Cómo ejecutar el script
 
-## Ejecución
+1. Abrí MATLAB u Octave y ubicá la carpeta actual (`Current Folder`) en la carpeta donde está el archivo `.m`.
+2. Ejecutá el script (`F5` en MATLAB, o escribiendo `proyecto1_motor_cd` en la consola de Octave).
+3. El programa va a pedir, en este orden, los 5 parámetros del motor:
 
-1. Abrir MATLAB.
-2. Seleccionar como carpeta de trabajo la carpeta que contiene `proyecto1_motor_cd.m`.
-3. Ejecutar en la **Command Window**:
+| Parámetro | Descripción | Unidades |
+|---|---|---|
+| `Kt` | Constante de par del motor | N·m/A |
+| `Ra` | Resistencia de armadura | Ω |
+| `b`  | Coeficiente de fricción del eje | N·m·s/rad |
+| `Kb` | Constante de fuerza electromotriz | V·s/rad |
+| `J`  | Momento de inercia (motor + carga) | kg·m² |
 
-```matlab
-proyecto1_motor_cd
-```
-
-También se puede abrir el archivo en el editor de MATLAB y seleccionar **Run**.
-
----
-
-## Parámetros de entrada
-
-El programa solicita los siguientes parámetros:
-
-* `Kt`: constante de par del motor ([N·m/A])
-* `Ra`: resistencia de armadura ([\Omega])
-* `b`: coeficiente de fricción del eje ([N·m·s/rad])
-* `Kb`: constante de fuerza electromotriz ([V·s/rad])
-* `J`: momento de inercia del motor y la carga ([kg·m^2])
-
-Todos los valores deben ser **reales y positivos**.
-
-Si se introduce un valor inválido, el programa lo rechaza y vuelve a solicitar el parámetro.
-
----
-
-# Ejemplo de ejecución
-
-Para verificar el funcionamiento del programa se puede utilizar el siguiente caso:
-
-```text
-Kt = 10
-Ra = 1
-b  = 0.1
-Kb = 0.1
-J  = 0.1
-```
-
-En la Command Window:
-
-```text
-Kt (constante de par del motor) [N*m/A]: 10
-Ra (resistencia de armadura) [Ohm]: 1
-b  (coeficiente de friccion del eje) [N*m*s/rad]: 0.1
-Kb (constante de fuerza electromotriz) [V*s/rad]: 0.1
-J  (momento de inercia motor+carga) [kg*m^2]: 0.1
-```
-
-Para estos valores:
-
-[
-K_M=\frac{10}{(1)(0.1)+(10)(0.1)}
-]
-
-[
-K_M\approx9.0909
-]
-
-y:
-
-[
-\tau=\frac{(1)(0.1)}{(1)(0.1)+(10)(0.1)}
-]
-
-[
-\tau\approx0.09091;s
-]
-
-Por lo tanto, la función de transferencia obtenida es:
-
-[
-G(s)=\frac{9.0909}{0.09091s+1}
-]
-
----
-
-## Resultados del caso de prueba
-
-Los principales resultados obtenidos son aproximadamente:
-
-| Parámetro                     | Resultado |
-| ----------------------------- | --------: |
-| (K_M)                         |    9.0909 |
-| (\tau)                        | 0.09091 s |
-| (y(\tau))                     |      5.75 |
-| (5\tau)                       |  0.4545 s |
-| (y(5\tau))                    |      9.03 |
-| Tiempo de asentamiento al 2 % |   0.356 s |
-| Error de estado estacionario  |   -8.0909 |
-
----
-
-# Gráfica de respuesta
-
-El programa genera automáticamente la respuesta del sistema ante un escalón unitario.
-
-En la gráfica se identifican los elementos solicitados para el proyecto:
-
-* **Curva azul:** respuesta (y(t)).
-* **Línea roja:** valor final (K_M).
-* **Punto magenta:** respuesta en (t=\tau).
-* **Punto naranja:** respuesta en (t=5\tau).
-* **Punto negro:** tiempo de asentamiento al 2 %.
-* **Error de estado estacionario:** se muestra cuando es visible.
-
-## Figura 1. Respuesta al escalón unitario
-
-**Insertar aquí la captura de la gráfica generada por MATLAB.**
-
-```text
-[ FIGURA DE LA RESPUESTA AL ESCALÓN ]
-```
-
-**Figura 1.** Respuesta al escalón unitario para (K_t=10), (R_a=1), (b=0.1), (K_b=0.1) y (J=0.1). Se muestran el valor final, la respuesta en (t=\tau), la respuesta en (t=5\tau), el tiempo de asentamiento al 2 % y el error de estado estacionario.
-
----
+4. Cada valor se valida como número real positivo. Si se ingresa texto, cero, un negativo o un número complejo, el script vuelve a pedir el dato sin detenerse.
 
 ## Salida del programa
 
-Durante la ejecución se muestran en la Command Window:
+**En consola** se imprimen:
+- `KM` y `τ` calculados.
+- La función de transferencia `G(s)`.
+- El valor final esperado del sistema (en t = 5τ).
+- El error de estado estacionario respecto a una referencia unitaria.
+- El valor de la respuesta en t = τ.
+- El tiempo de asentamiento real al 2% (calculado dinámicamente, no aproximado).
 
-* (K_M)
-* (\tau)
-* Función de transferencia (G(s))
-* Respuesta en (t=\tau)
-* Respuesta en (t=5\tau)
-* Error de estado estacionario
-* Tiempo de asentamiento al 2 %
+**En una ventana gráfica** se muestra la curva de respuesta al escalón unitario, con las siguientes marcas:
 
-Al finalizar se genera automáticamente la gráfica correspondiente.
+| Color | Elemento |
+|---|---|
+| Rojo (línea punteada) | Valor final esperado del sistema |
+| Verde (cuadrado) | Punto en t = 5τ |
+| Naranja (círculo) | Punto en t = τ (≈63.2% del valor final) |
+| Negro (triángulo) | Tiempo de asentamiento al 2% |
+| Verde (línea vertical, solo si es visible) | Error de estado estacionario |
 
----
+## Ejemplo de prueba
 
-## Validación de entradas
+Con los siguientes valores de un motor de CD pequeño:
 
-El programa rechaza entradas no válidas, por ejemplo:
-
-```text
-0
--1
-abc
+```
+Kt = 0.01
+Ra = 1
+b  = 0.001
+Kb = 0.01
+J  = 0.0001
 ```
 
-En estos casos se muestra:
+Se obtiene `KM ≈ 9.09`, `τ ≈ 0.0909 s`, y un tiempo de asentamiento de aproximadamente `0.356 s`.
 
-```text
--> Valor invalido. Debe ingresar un numero real positivo.
-```
+## Notas
 
-y se vuelve a solicitar el parámetro.
-
----
-
-## Funcionalidad implementada
-
-El script realiza automáticamente:
-
-1. Lectura de (K_t), (R_a), (b), (K_b) y (J).
-2. Validación de los parámetros.
-3. Cálculo de (K_M).
-4. Cálculo de (\tau).
-5. Construcción de (G(s)).
-6. Simulación de la respuesta al escalón unitario.
-7. Cálculo de (y(\tau)).
-8. Cálculo de (y(5\tau)).
-9. Cálculo del error de estado estacionario.
-10. Cálculo del tiempo de asentamiento al 2 %.
-11. Generación de la gráfica con los puntos requeridos.
+- El error de estado estacionario se calcula como `1 - KM`. Si `KM` está lejos de 1, ese error va a ser grande — esto es esperado, ya que el script simula el motor en lazo abierto (sin controlador), no un sistema realimentado.
+- El tiempo de asentamiento se calcula de forma exacta (primer instante en que la respuesta entra y permanece dentro del ±2% del valor final), no se aproxima con una regla fija como `4τ`.
