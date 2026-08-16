@@ -20,7 +20,7 @@ KM  = Kt / (Ra·b + Kt·Kb)
 
 ## Archivo principal
 
-`proyecto1_motor_cd.m` — script único, autocontenido. La versión `proyecto1_motor_cd_comentado.m` es funcionalmente idéntica pero incluye comentarios línea por línea con fines didácticos.
+[`script/SistControl_MotorDC.m`](script/SistControl_MotorDC.m) — script único, autocontenido, con comentarios línea por línea.
 
 ## Requisitos
 
@@ -34,8 +34,8 @@ KM  = Kt / (Ra·b + Kt·Kb)
 
 ## Cómo ejecutar el script
 
-1. Abrí MATLAB u Octave y ubicá la carpeta actual (`Current Folder`) en la carpeta donde está el archivo `.m`.
-2. Ejecutá el script (`F5` en MATLAB, o escribiendo `proyecto1_motor_cd` en la consola de Octave).
+1. Abrí MATLAB u Octave y ubicá la carpeta actual (`Current Folder`) en la carpeta `script/`, donde está `SistControl_MotorDC.m`.
+2. Ejecutá el script (`F5` en MATLAB, o escribiendo `SistControl_MotorDC` en la consola de Octave).
 3. El programa va a pedir, en este orden, los 5 parámetros del motor:
 
 | Parámetro | Descripción | Unidades |
