@@ -4,6 +4,10 @@ Gracias.
 
 Luis C. Rosales A.
 -----------------
+
+Estudiante: Esteban Vargas Fernández.
+Carné: 2023395790.
+
 # Proyecto individual 1 - Simulación de motor de CD (sistema de primer orden)
 
 **EL-5409 Laboratorio de Control Automático**
