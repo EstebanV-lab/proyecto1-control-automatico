@@ -1,3 +1,9 @@
+Hola.
+Puede por favor agregar su nombre completo y su numero de ID?
+Gracias.
+
+Luis C. Rosales A.
+-----------------
 # Proyecto individual 1 - Simulación de motor de CD (sistema de primer orden)
 
 **EL-5409 Laboratorio de Control Automático**
