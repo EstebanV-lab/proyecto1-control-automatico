@@ -1,7 +1,8 @@
 # Proyecto individual 2 - Routh-Hurwitz y Root Locus
 
 **EL-5409 Laboratorio de Control Automático** //
-Estudiante: Esteban Vargas Fernández — Carné: 2023395790
+**Estudiante: Esteban Vargas Fernández.**<br>
+**Carné: 2023395790.**
 
 ## Descripción
 
