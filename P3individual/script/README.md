@@ -1,259 +1,95 @@
-# Proyecto corto #3 — Diseño de compensadores por Root Locus
+# Proyecto Individual 3 — Diseño de compensadores por Root Locus
 
-Este programa permite estudiar una planta de control a partir de sus polos y ceros, diseñar un compensador **P, PI, PD o PID**, observar cómo cambia el **lugar de las raíces** y comparar la respuesta al escalón del sistema original con la del sistema compensado.
+Este proyecto implementa en **MATLAB** un programa para analizar una planta a partir de sus polos y ceros, diseñar compensadores **P, PI, PD y PID**, visualizar el **lugar de las raíces** antes y después de la compensación y comparar la respuesta al escalón del sistema original con la del sistema compensado.
 
----
+## Archivo principal
 
-## 1. Requisitos
+El programa principal se encuentra en:
 
-Para ejecutar el programa se necesita:
+```text
+compensador.m
+```
+
+## Requisitos
+
+Para ejecutar el proyecto se necesita:
 
 - MATLAB.
-- **Control System Toolbox**.
-- El archivo:
+- Control System Toolbox.
+- El archivo `compensador.m`.
 
+## Ejecución
 
-No se necesita ingresar puntos con el mouse. Todos los datos se escriben desde la **Command Window** de MATLAB.
+1. Abra MATLAB.
+2. Navegue hasta la carpeta donde se encuentra `compensador.m`.
+3. Abra el archivo en el editor de MATLAB.
+4. Presione **Run**.
 
----
-
-## 2. Abrir el proyecto
-
-1. Guarde `proyecto3_root_locus_consola_v2.m` en una carpeta fácil de encontrar.
-2. Abra MATLAB.
-3. En el panel **Current Folder**, navegue hasta la carpeta donde guardó el archivo.
-4. Abra el archivo haciendo doble clic sobre él.
-
-También puede verificar que MATLAB se encuentre en la carpeta correcta escribiendo:
+También puede ejecutarlo directamente desde la **Command Window** con:
 
 ```matlab
-pwd
+compensador
 ```
 
----
+## Uso del programa
 
-## 3. Ejecutar el programa
+Al iniciar, el programa solicita los **ceros** y **polos** de la planta.
 
-Hay dos formas sencillas.
+Por ejemplo, para:
 
-### Opción A — Botón Run
+\[
+G(s)=\frac{1}{(s+1)(s+4)}
+\]
 
-Con el archivo abierto en el editor de MATLAB, presione el botón:
+se deben ingresar:
 
 ```text
-Run
+Ingrese los CEROS de G(s): []
+Ingrese los POLOS de G(s): [-1 -4]
 ```
 
-### Opción B — Command Window
-
-Escriba:
-
-```matlab
-proyecto3_root_locus_consola_v2
-```
-
-y presione **Enter**.
-
----
-
-## 4. Ingresar los ceros de la planta
-
-El programa mostrará:
-
-```text
-Ingrese los CEROS de G(s):
-```
-
-Si la planta no tiene ceros, puede escribir:
+Si la planta no tiene ceros, se puede escribir:
 
 ```text
 []
 ```
 
-o simplemente presionar **Enter**.
-
-Si, por ejemplo, existe un cero en `s = -2`, escriba:
-
-```text
-[-2]
-```
-
----
-
-## 5. Ingresar los polos de la planta
-
-El programa mostrará:
-
-```text
-Ingrese los POLOS de G(s):
-```
-
-Por ejemplo, para la planta:
-
-```text
-G(s) = 1 / ((s+1)(s+4))
-```
-
-se deben escribir:
-
-```text
-[-1 -4]
-```
-
-Si hay polos complejos, deben escribirse en pares conjugados. Ejemplo:
+Si existen polos o ceros complejos, deben ingresarse en pares conjugados. Por ejemplo:
 
 ```text
 [-2+3i -2-3i]
 ```
 
----
+## Flujo del programa
 
-## 6. Primer Root Locus
+Después de ingresar la planta, el programa realiza el siguiente proceso:
 
-Después de ingresar polos y ceros, MATLAB:
+1. Construye la función de transferencia \(G(s)\).
+2. Muestra la ecuación característica de la planta.
+3. Genera el **Root Locus original**.
+4. Solicita el tipo de compensador:
+   - `1` — P
+   - `2` — PI
+   - `3` — PD
+   - `4` — PID
+5. Solicita la ubicación deseada del polo dominante.
+6. Calcula los parámetros del compensador.
+7. Muestra la función de transferencia \(C(s)\).
+8. Obtiene la nueva ecuación característica.
+9. Genera un **segundo Root Locus** correspondiente al sistema compensado \(C(s)G(s)\).
+10. Después de presionar **Enter**, muestra la comparación de la respuesta al escalón.
+11. Permite realizar otro diseño utilizando la misma planta.
 
-1. Construye la función de transferencia `G(s)`.
-2. Muestra su ecuación característica.
-3. Abre la **Figura 1**, correspondiente al:
+## Ejemplo de prueba
 
-```text
-Root Locus de la planta original G(s)
-```
-
-Esta gráfica sirve como referencia para observar la distribución original de polos y las trayectorias del lugar de las raíces.
-
----
-
-## 7. Seleccionar el compensador
-
-En la Command Window aparecerá:
-
-```text
-1) P
-2) PI
-3) PD
-4) PID
-```
-
-Escriba el número correspondiente y presione **Enter**.
-
-### P
-
-```text
-1
-```
-
-### PI
-
-```text
-2
-```
-
-### PD
-
-```text
-3
-```
-
-### PID
-
-```text
-4
-```
-
----
-
-## 8. Ingresar el polo deseado
-
-Después se solicita:
-
-```text
-Polo deseado s_d =
-```
-
-El valor se escribe directamente en consola.
-
-Ejemplos:
-
-```text
--2
-```
-
-o:
-
-```text
--3+2i
-```
-
-Para un polo complejo solo es necesario introducir uno de los dos polos conjugados. El programa considera automáticamente la existencia de su conjugado.
-
----
-
-## 9. Segundo Root Locus
-
-Una vez calculado el compensador, MATLAB muestra:
-
-- `C(s)`.
-- La nueva ecuación característica.
-- Los polos obtenidos.
-- El error entre el polo solicitado y el polo resultante.
-
-Después abre la **Figura 2**:
-
-```text
-Root Locus compensado C(s)G(s)
-```
-
-En esta gráfica se puede observar el nuevo lugar de las raíces después de agregar el compensador.
-
-El programa también marca:
-
-- El polo deseado.
-- Los polos obtenidos en el sistema compensado.
-
-La Command Window mostrará:
-
-```text
-Revise la grafica y presione ENTER para mostrar la respuesta al escalon...
-```
-
-Revise el segundo Root Locus y luego presione **Enter**.
-
----
-
-## 10. Respuesta al escalón
-
-Después de presionar Enter se abre la **Figura 3**:
-
-```text
-Comparacion de la respuesta al escalon
-```
-
-La gráfica contiene:
-
-- **Sistema original**.
-- **Sistema compensado**.
-
-Esta comparación permite analizar cambios en:
-
-- Rapidez de respuesta.
-- Tiempo de establecimiento.
-- Sobreimpulso.
-- Oscilaciones.
-- Error de estado estacionario.
-
----
-
-## 11. Casos de prueba recomendados
-
-Utilice inicialmente:
+Utilizando:
 
 ```text
 CEROS: []
 POLOS: [-1 -4]
 ```
 
-### Caso P
+### Compensador P
 
 Seleccione:
 
@@ -262,15 +98,13 @@ Opcion: 1
 Polo deseado: -2.5+0.8660254i
 ```
 
-Resultado aproximado esperado:
+Resultado aproximado:
 
 ```text
 Kp = 3
 ```
 
----
-
-### Caso PI
+### Compensador PI
 
 Seleccione:
 
@@ -279,16 +113,14 @@ Opcion: 2
 Polo deseado: -1+2i
 ```
 
-Resultado aproximado esperado:
+Resultado aproximado:
 
 ```text
 Kp = 7
 Ki = 15
 ```
 
----
-
-### Caso PD
+### Compensador PD
 
 Seleccione:
 
@@ -297,37 +129,24 @@ Opcion: 3
 Polo deseado: -3+2i
 ```
 
-Resultado aproximado esperado:
+Resultado aproximado:
 
 ```text
 Kp = 9
 Kd = 1
 ```
 
----
-
-### Caso PID
+### Compensador PID
 
 Seleccione:
 
 ```text
 Opcion: 4
 Polo deseado: -3+2i
+Ki = 13
 ```
 
-Cuando el programa solicite:
-
-```text
-Ingrese el valor de Ki que desea fijar:
-```
-
-escriba:
-
-```text
-13
-```
-
-Resultado aproximado esperado:
+Resultado aproximado:
 
 ```text
 Kp = 15
@@ -335,101 +154,66 @@ Ki = 13
 Kd = 2
 ```
 
----
+## Gráficas generadas
 
-## 12. Probar otro compensador
+El programa genera tres tipos de gráficas:
 
-Después de mostrar las gráficas, el programa preguntará:
+### Root Locus original
+
+Muestra el lugar de las raíces de la planta \(G(s)\) antes de aplicar el compensador.
+
+### Root Locus compensado
+
+Muestra el lugar de las raíces de:
+
+\[
+C(s)G(s)
+\]
+
+También se indican la ubicación deseada del polo y los polos obtenidos para el sistema compensado.
+
+### Respuesta al escalón
+
+Compara:
+
+- Sistema original.
+- Sistema compensado.
+
+Esta gráfica permite observar cambios en la rapidez de respuesta, sobreimpulso, oscilaciones y error de estado estacionario.
+
+## Observaciones
+
+- Para los compensadores PI, PD y PID se recomienda utilizar polos deseados con parte imaginaria distinta de cero, por ejemplo:
 
 ```text
-¿Desea probar otro compensador con la misma planta? (s/n):
+-3+2i
 ```
 
-Escriba:
+- En el caso PID se fija inicialmente \(K_i\), y el programa calcula \(K_p\) y \(K_d\).
+- Si una ubicación seleccionada no pertenece al lugar de las raíces alcanzable mediante un compensador P, el programa muestra una advertencia.
+- Para realizar otra prueba con la misma planta, responda:
 
 ```text
 s
 ```
 
-para realizar otro diseño sin volver a ingresar la planta.
+cuando aparezca:
 
-Escriba:
+```text
+¿Desea probar otro compensador con la misma planta? (s/n):
+```
+
+Para finalizar, responda:
 
 ```text
 n
 ```
 
-para finalizar.
+## Autor
 
----
+**Esteban Vargas Fernández**  
+Carné: **2023395790**
 
-## 13. Significado de las tres figuras
+## Curso
 
-### Figura 1 — Root Locus original
-
-Muestra el comportamiento de la planta antes de agregar el compensador.
-
-### Figura 2 — Root Locus compensado
-
-Muestra cómo el compensador modifica el lugar de las raíces y permite comparar la ubicación deseada con los polos realmente obtenidos.
-
-### Figura 3 — Respuesta al escalón
-
-Compara directamente la respuesta temporal del sistema original y del sistema compensado.
-
----
-
-## 14. Errores comunes
-
-### MATLAB no reconoce `tf`, `rlocus`, `feedback` o `step`
-
-Verifique que tenga instalado **Control System Toolbox**.
-
-Puede comprobarlo con:
-
-```matlab
-ver
-```
-
-### Error al ingresar polos complejos
-
-Debe usar `i`:
-
-```text
--3+2i
-```
-
-No escriba:
-
-```text
--3+2
-```
-
-### PI, PD o PID con un polo completamente real
-
-Para estos casos se recomienda utilizar un polo con parte imaginaria distinta de cero, por ejemplo:
-
-```text
--3+2i
-```
-
-### El resultado no coincide exactamente con el polo solicitado
-
-Esto puede ocurrir especialmente con un compensador P si la ubicación ingresada no pertenece al lugar de las raíces disponible para una ganancia proporcional positiva.
-
----
-
-## 15. Resumen de uso
-
-```text
-1. Ejecutar el programa.
-2. Ingresar ceros.
-3. Ingresar polos.
-4. Revisar el Root Locus original.
-5. Seleccionar P, PI, PD o PID.
-6. Escribir el polo deseado.
-7. Revisar el Root Locus compensado.
-8. Presionar Enter.
-9. Revisar la respuesta al escalón.
-10. Elegir si se desea realizar otra prueba.
-```
+**EL-5409 Laboratorio de Control Automático**
