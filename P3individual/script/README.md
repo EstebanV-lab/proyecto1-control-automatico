@@ -12,9 +12,6 @@ Para ejecutar el programa se necesita:
 - **Control System Toolbox**.
 - El archivo:
 
-```text
-proyecto3_root_locus_consola_v2.m
-```
 
 No se necesita ingresar puntos con el mouse. Todos los datos se escriben desde la **Command Window** de MATLAB.
 
