@@ -1,3 +1,12 @@
+## Autor
+
+**Esteban Vargas Fernández**  
+Carné: **2023395790**
+
+## Curso
+
+**EL-5409 Laboratorio de Control Automático**
+
 # Proyecto Individual 3 — Diseño de compensadores por Root Locus
 
 Este proyecto implementa en **MATLAB** un programa para analizar una planta a partir de sus polos y ceros, diseñar compensadores **P, PI, PD y PID**, visualizar el **lugar de las raíces** antes y después de la compensación y comparar la respuesta al escalón del sistema original con la del sistema compensado.
@@ -209,11 +218,4 @@ Para finalizar, responda:
 n
 ```
 
-## Autor
 
-**Esteban Vargas Fernández**  
-Carné: **2023395790**
-
-## Curso
-
-**EL-5409 Laboratorio de Control Automático**
